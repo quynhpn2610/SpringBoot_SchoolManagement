@@ -3,7 +3,11 @@ package com.springbootproject1.service.student;
 import com.springbootproject1.model.Student;
 import com.springbootproject1.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Service
 public class StudentService implements IStudentService {
 
     @Autowired // dependency injection using bean factory
@@ -16,16 +20,16 @@ public class StudentService implements IStudentService {
 
     @Override
     public Iterable<Student> findAll() {
-        return studentRepository.getAllStudent();
+        return studentRepository.findAllStudents();
     }
 
     @Override
-    public Student findById(Long id) {
-        return studentRepository.getStudentById(id);
+    public Optional<Student> findById(Long id) {
+        return studentRepository.findById(id);
     }
 
     @Override
     public void deleteById(Long id) {
-        studentRepository.deleteStudentById(id);
+        studentRepository.deleteById(id);
     }
 }
