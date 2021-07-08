@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class StudentService implements IStudentService {
 
-    @Autowired // dependency injection using bean factory
+    @Autowired // dependency injection using bean factory created in repository (only create the bean once)
     private IStudentRepository studentRepository;
 
     @Override

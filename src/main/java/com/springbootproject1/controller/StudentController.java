@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@Controller //return View
+// Rest Controller --> object (json)
 @RequestMapping("/student") // chuyen cac request /student vao day roi xu li
 public class StudentController {
 
     @Autowired
     private IStudentService studentService;
 
-    @GetMapping("/student-list")
+    @GetMapping("/student-list") // RESTful APIs GET POST PUT DELETE PATCH
     public ModelAndView getAllStudents() {
         Iterable<Student> students = studentService.findAll();
         ModelAndView modelAndView = new ModelAndView("/student/student-list");
-        modelAndView.addObject("students", students);
+        modelAndView.addObject("pupils", students);
         return modelAndView;
     }
 }
