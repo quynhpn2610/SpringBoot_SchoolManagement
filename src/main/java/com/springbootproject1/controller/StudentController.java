@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller //return View
 // Rest Controller --> object (json)
-@RequestMapping("/student") // chuyen cac request /student vao day roi xu li
+@RequestMapping("/student") // chuyen cac request /student vao day roi xu li // localhost:8080/student/student-list
 public class StudentController {
 
     @Autowired
