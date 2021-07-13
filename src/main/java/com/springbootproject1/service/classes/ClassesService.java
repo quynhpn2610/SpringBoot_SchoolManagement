@@ -19,7 +19,7 @@ public class ClassesService implements IClassesService{
 
     @Override
     public Iterable<Classes> findAll() {
-        return classesRepository.findAllClasses();
+        return classesRepository.findAll();
     }
 
     @Override

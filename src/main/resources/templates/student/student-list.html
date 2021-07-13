@@ -11,6 +11,12 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <a class="btn btn-primary" th:href="@{/student/add-student}">Add new student</a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
@@ -18,6 +24,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Age</th>
+                    <th scope="col">Class</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,6 +32,7 @@
                     <th scope="row" th:text="${student.id}"></th>
                     <td th:text="${student.name}"></td>
                     <td th:text="${student.age}"></td>
+                    <td th:text="${student.classes}"></td>
                 </tr>
                 </tbody>
             </table>

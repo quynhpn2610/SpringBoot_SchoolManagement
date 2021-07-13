@@ -1,10 +1,14 @@
 package com.springbootproject1.controller;
 
+import com.springbootproject1.model.Classes;
 import com.springbootproject1.model.Student;
+import com.springbootproject1.service.classes.IClassesService;
 import com.springbootproject1.service.student.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +19,8 @@ public class StudentController {
 
     @Autowired
     private IStudentService studentService;
+    @Autowired
+    private IClassesService classesService;
 
     @GetMapping("/student-list") // RESTful APIs GET POST PUT DELETE PATCH
     public ModelAndView getAllStudents() {
@@ -23,4 +29,25 @@ public class StudentController {
         modelAndView.addObject("pupils", students);
         return modelAndView;
     }
+
+    @GetMapping("/add-student")
+    public ModelAndView showAddForm(){
+        Iterable<Classes> classes = classesService.findAll();
+        ModelAndView addForm = new ModelAndView("student/add-student");
+        addForm.addObject("student", new Student());
+        addForm.addObject("classes", classes);
+        return addForm;
+    }
+
+    @PostMapping("/add-student")
+    public ModelAndView saveStudent(@ModelAttribute Student student){
+        Iterable<Classes> classes = classesService.findAll();
+        studentService.save(student);
+        // Quay ve form addForm rong de dien tiep
+        ModelAndView addForm = new ModelAndView("/student/add-student");
+        addForm.addObject("student", new Student());
+        addForm.addObject("classes", classes);
+        return addForm;
+    }
+
 }

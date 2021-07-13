@@ -20,7 +20,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public Iterable<Student> findAll() {
-        return studentRepository.findAllStudents();
+        return studentRepository.findAll();
     }
 
     @Override
