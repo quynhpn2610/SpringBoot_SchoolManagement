@@ -6,11 +6,10 @@ import com.springbootproject1.service.classes.IClassesService;
 import com.springbootproject1.service.student.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller //return View
 // Rest Controller --> object (json)
@@ -48,6 +47,28 @@ public class StudentController {
         addForm.addObject("student", new Student());
         addForm.addObject("classes", classes);
         return addForm;
+    }
+
+    @GetMapping("/update/{student_id}")
+    public ModelAndView showUpdateForm(@PathVariable Long student_id){
+        Optional<Student> studentOptional = studentService.findById(student_id);
+        Iterable<Classes> classesIterable = classesService.findAll();
+        ModelAndView modelAndView;
+        if (studentOptional.isPresent()){
+            modelAndView = new ModelAndView("/student/student-update");
+            modelAndView.addObject("student", studentOptional.get());
+            modelAndView.addObject("classes", classesIterable);
+        }
+        else{
+            modelAndView = new ModelAndView("404-notfound");
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/student-update")
+    public String updateStudent(@ModelAttribute Student student){
+        studentService.save(student);
+        return "redirect:/student/student-list";
     }
 
 }
