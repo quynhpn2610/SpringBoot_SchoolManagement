@@ -71,4 +71,12 @@ public class StudentController {
         return "redirect:/student/student-list";
     }
 
+    @GetMapping("/delete/{student_id}")
+    // deletebyId instead of findById
+    // return a string line 71
+    public String deleteStudent(@PathVariable Long student_id){
+        studentService.deleteById(student_id);
+        return "redirect:/student/student-list";
+    }
+
 }
