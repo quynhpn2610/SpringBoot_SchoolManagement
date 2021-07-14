@@ -43,10 +43,17 @@ public class ClassesController {
         ModelAndView modelAndView;
         if (classesOptional.isPresent()) {
             modelAndView = new ModelAndView("/classes/classes-update");
+            modelAndView.addObject("class", classesOptional.get());
         }
         else {
             modelAndView = new ModelAndView("404-notfound");
         }
         return modelAndView;
+    }
+
+    @PostMapping("/update")
+    public String updateClass(@ModelAttribute Classes classes) {
+        classesService.save(classes);
+        return "redirect:/classes/classes-list";
     }
 }
