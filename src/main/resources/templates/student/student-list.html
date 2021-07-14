@@ -33,7 +33,7 @@
                     <td th:text="${student.age}"></td>
                     <td th:text="${student.classes.level}"></td>
                     <td><a th:href="@{/student/update/__${student.id}__}" class="btn btn-success">Update</a></td>
-                    <td><a th:href="@{/student/delete/__${student.id}__}" class="btn btn-danger">Delete</a></td>
+                    <td><a th:href="@{/student/delete/__${student.id}__}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

@@ -56,4 +56,11 @@ public class ClassesController {
         classesService.save(classes);
         return "redirect:/classes/classes-list";
     }
+    @GetMapping("/delete/{id}")
+    // deleteById instead of findById
+    // return a string like line 71
+    public String deleteClass(@PathVariable Long id){
+        classesService.deleteById(id);
+        return "redirect:/classes/classes-list";
+    }
 }
