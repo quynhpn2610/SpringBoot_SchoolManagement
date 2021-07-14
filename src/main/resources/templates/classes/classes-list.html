@@ -23,6 +23,7 @@
                     <th scope="col">id</th>
                     <th scope="col">Level</th>
                     <th scope="col">Rate</th>
+                    <th scope="col" colspan="2" style="text-align: center"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,10 +31,20 @@
                     <th scope="row" th:text="${class.id}"></th>
                     <td th:text="${class.level}"></td>
                     <td th:text="${class.rate}"></td>
+                    <td><a th:href="@{/classes/update/__${class.id}__}" class="btn btn-success">Update</a></td>
+                    <td><a th:href="@{/classes/delete}" class="btn btn-danger">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a class="btn btn-outline-info" th:href="@{/}">Homepage</a>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 

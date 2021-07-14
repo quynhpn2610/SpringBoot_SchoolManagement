@@ -4,11 +4,8 @@ import com.springbootproject1.model.Classes;
 import com.springbootproject1.service.classes.IClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -38,5 +35,18 @@ public class ClassesController {
         ModelAndView addForm = new ModelAndView("/classes/add-class");
         addForm.addObject("class", new Classes());
         return addForm;
+    }
+
+    @GetMapping("/update/{id}")
+    public ModelAndView showUpdateForm(@PathVariable Long id) {
+        Optional<Classes> classesOptional = classesService.findById(id);
+        ModelAndView modelAndView;
+        if (classesOptional.isPresent()) {
+            modelAndView = new ModelAndView("/classes/classes-update");
+        }
+        else {
+            modelAndView = new ModelAndView("404-notfound");
+        }
+        return modelAndView;
     }
 }
